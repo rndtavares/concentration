@@ -9,7 +9,12 @@ import UIKit
 
 class ViewController: UIViewController {
 	
-	lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+    lazy var game: Concentration =
+        Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
+    
+    var numberOfPairsOfCards: Int {
+        return (cardButtons.count + 1) / 2
+    }
 	
 	var flipCount = 0 {
 		didSet {
@@ -60,7 +65,7 @@ class ViewController: UIViewController {
 	}
     
     @IBAction func newGame(_ sender: Any) {
-        game.startGame(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+        game.startGame(numberOfPairsOfCards: numberOfPairsOfCards)
         flipCount = 0
         emojiChoices = ["🦇", "😱", "🙀", "😈", "🎃", "👻", "🍭", "🍬", "🍎"]
         updateViewFromModel()
