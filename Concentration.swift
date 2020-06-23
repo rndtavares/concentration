@@ -9,8 +9,8 @@ import Foundation
 
 class Concentration {
     
-    var cards = [Card]()
-    var indexOfOneAndOnlyFaceUpCard: Int? {
+    private(set) var cards = [Card]()
+    private var indexOfOneAndOnlyFaceUpCard: Int? {
         get {
             var foundIndex: Int?
             for index in cards.indices {
@@ -32,6 +32,7 @@ class Concentration {
     }
     
     func chooseCard(at index: Int) {
+        assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index)): chosen index not in the cards")
         if !cards[index].isMatched {
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
                 // check if cards match
@@ -52,6 +53,7 @@ class Concentration {
     }
     
     func startGame(numberOfPairsOfCards: Int){
+        assert(numberOfPairsOfCards > 0, "Concentration.startGame(\(numberOfPairsOfCards)): you must have at least one pair of cards")
         cards.removeAll()
         for _ in 1...numberOfPairsOfCards {
             let card = Card()
@@ -60,8 +62,7 @@ class Concentration {
         //    TODO: Shuffle the cards
         var shuflledCards = [Card]()
         while cards.count > 1 {
-            let randomIndex = Int(arc4random_uniform(UInt32(cards.count - 1)))
-            shuflledCards.append(cards.remove(at: randomIndex))
+            shuflledCards.append(cards.remove(at: cards.count.arc4random))
         }
         cards += shuflledCards
     }
