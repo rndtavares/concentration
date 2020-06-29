@@ -30,7 +30,7 @@ class ViewController: UIViewController {
         let attributedString = NSAttributedString(string: "Flips: \(flipCount)", attributes: attributes)
         flipCountLabel.attributedText = attributedString
     }
-	
+    
     @IBOutlet private weak var flipCountLabel: UILabel! {
         didSet {
             updateFlipCountLabel()
@@ -65,22 +65,31 @@ class ViewController: UIViewController {
 		
 	}
 	
-	private var emojiChoices = "🦇😱🙀😈🎃👻🍭🍬🍎"
+	private var emojiChoicesArray = ["🦇😱🙀😈🎃👻🍭🍬🍎", "😀☺️😍😭🤓😔😡😱🤯🤭😴", "🐶🐱🐭🐹🐰🦊🐻🐼🐨🐯🦁🐮🐷🐸🐵", "⚽️🏀🏈⚾️🎾🏐🏉🎱🏆🥇", "🚗🚔🚍🚲🛴🚒🚁✈️🛳🚊", "🇦🇷🇧🇷🇨🇦🇯🇵🇿🇦🇩🇪🇺🇸🇪🇸🇬🇷🇮🇱"]
+    private var actualGameEmojiChoices = ""
 	
 	private var emoji = [Card: String]()
 	
 	private func emoji(for card: Card) -> String {
-		if emoji[card] == nil, emojiChoices.count > 0 {
-            let randomStringIndex = emojiChoices.index(emojiChoices.startIndex, offsetBy: emojiChoices.count.arc4random)
-			emoji[card] = String(emojiChoices.remove(at: randomStringIndex))
+        if actualGameEmojiChoices == "" {
+            selectTheme()
+        }
+		if emoji[card] == nil, actualGameEmojiChoices.count > 0 {
+            let randomStringIndex = actualGameEmojiChoices.index(actualGameEmojiChoices.startIndex, offsetBy: actualGameEmojiChoices.count.arc4random)
+			emoji[card] = String(actualGameEmojiChoices.remove(at: randomStringIndex))
 		}
 		return emoji[card] ?? "?"
 	}
     
+    private func selectTheme(){
+        let randomStringIndex = emojiChoicesArray.index(emojiChoicesArray.startIndex, offsetBy: emojiChoicesArray.count.arc4random)
+        actualGameEmojiChoices = String(emojiChoicesArray[randomStringIndex])
+    }
+    
     @IBAction func newGame(_ sender: Any) {
         game.startGame(numberOfPairsOfCards: numberOfPairsOfCards)
         flipCount = 0
-        emojiChoices = "🦇😱🙀😈🎃👻🍭🍬🍎"
+        selectTheme()
         updateViewFromModel()
     }
     
