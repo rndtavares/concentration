@@ -20,21 +20,34 @@ struct Concentration {
             }
         }
     }
+    private(set) var score = 0
+    private(set) var flipCount = 0
     
     mutating func chooseCard(at index: Int) {
         assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index)): chosen index not in the cards")
+        flipCount += 1
         if !cards[index].isMatched {
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
                 // check if cards match
                 if cards[matchIndex] == cards[index] {
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
+                    score += 2
+                }else{
+                    if cards[index].everSeen{
+                        score -= 1
+                    }
+                    if cards[matchIndex].everSeen {
+                        score -= 1
+                    }
+                    cards[matchIndex].everSeen = true
+                    cards[index].everSeen = true
                 }
                 cards[index].isFaceUp = true
             } else {
                 indexOfOneAndOnlyFaceUpCard = index
             }
-            
+            print(score)
         }
     }
     
@@ -44,6 +57,8 @@ struct Concentration {
     
     mutating func startGame(numberOfPairsOfCards: Int){
         assert(numberOfPairsOfCards > 0, "Concentration.startGame(\(numberOfPairsOfCards)): you must have at least one pair of cards")
+        score = 0
+        flipCount = 0
         cards.removeAll()
         for _ in 1...numberOfPairsOfCards {
             let card = Card()
