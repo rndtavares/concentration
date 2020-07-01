@@ -47,7 +47,6 @@ struct Concentration {
             } else {
                 indexOfOneAndOnlyFaceUpCard = index
             }
-            print(score)
         }
     }
     

@@ -214,6 +214,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="concentrationView" destination="8bC-Xf-vdC" id="sgU-Q6-Ocb"/>
                         <outlet property="flipCountLabel" destination="xgj-y4-qbj" id="Imy-Mg-ppo"/>
                         <outlet property="scoreLabel" destination="g2J-0J-x6V" id="QIw-hE-hKQ"/>
                         <outletCollection property="cardButtons" destination="B9O-Ih-wOw" collectionClass="NSMutableArray" id="WC9-ot-UGN"/>
