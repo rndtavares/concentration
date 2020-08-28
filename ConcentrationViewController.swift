@@ -91,8 +91,8 @@ class ConcentrationViewController: UIViewController {
     }
     
     private var seenCards = ""
-    private var actualGameEmojiChoices = ""
-    var actualColorThemes = [#colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1),#colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)]
+    private var actualGameEmojiChoices = "🦇😱🙀😈🎃👻🍭🍬🍎"
+    var actualColorThemes = [#colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1),#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)]
 	
 	private var emoji = [Card: String]()
 	

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConcentrationThemeChooserViewController: UIViewController {
+class ConcentrationThemeChooserViewController: UIViewController, UISplitViewControllerDelegate {
 
     let gameThemeArray = ["Halloween":"🦇😱🙀😈🎃👻🍭🍬🍎",
                                   "Emojis":"😀☺️😍😭🤓😔😡😱🤯🤭😴",
@@ -23,6 +23,21 @@ class ConcentrationThemeChooserViewController: UIViewController {
                                   "Sports" : [#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)],
                                   "Vehicles" : [#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1),#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)],
                                   "Flags" : [#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1),#colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)]]
+    
+    override func awakeFromNib() {
+        splitViewController?.delegate = self
+    }
+    
+    func splitViewController(_ splitViewController: UISplitViewController,
+                             collapseSecondary secondaryViewController: UIViewController,
+                             onto primaryViewController: UIViewController
+        ) -> Bool
+    {
+        if let cvc = secondaryViewController as? ConcentrationViewController {
+            return cvc.theme == nil
+        }
+        return false
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Choose Theme" {
