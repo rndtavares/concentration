@@ -8,9 +8,9 @@
 
 import UIKit
 
-class ConcentrationThemeChooserViewController: VCLLoggingViewController, UISplitViewControllerDelegate {
+class ConcentrationThemeChooserViewController: UIViewController, UISplitViewControllerDelegate {
 
-    let gameThemeArray = ["Halloween":"🦇😱🙀😈🎃👻🍭🍬🍎",
+    let gameThemeArray = ["Halloween":"🦇😱🙀😈🎃👻🍭🍬🍎🇧🇷",
                                   "Emojis":"😀☺️😍😭🤓😔😡😱🤯🤭😴",
                                   "Animals":"🐶🐱🐭🦊🐼🐨🦁🐮🐷🐸🐵",
                                   "Sports":"⚽️🏀🏈⚾️🎾🏐🏉🎱🏆🥇",
